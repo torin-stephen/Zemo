@@ -1,7 +1,6 @@
-# Ketyl
+# Zemo
 ****
-A modern URL shortener built with React, Material UI and Firebase. Made to replace [ovre](https://github.com/torin-stephen/shorturls) (my old URL Shortener)
-
+A modern social link page app built with React, Material UI and Firebase. Made on the basis of [Ketyl](https://ketyl.ml/gh-ketyl)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ****
@@ -9,7 +8,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 1. Hosted with FireBase
 2. Admin Panel
-3. Domain Customization
 4. Modern UI
 
 ****
@@ -19,26 +17,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 2. Short domain
 
-3. Enable Email/Password authentication in your Firebase Authentication settings
+3. Enable Google authentication in your Firebase Authentication settings
 
 4. Enable Firestore in the Firebase project.
 ****
 ## How to Use
 
-1. Visit https://ketyl.ml/
+1. Visit https://switching.ml/
 
-<img src="https://i.ibb.co/fqT2Xwk/login.png" alt="login" border="0" />
+2. Login using google.
 
-2. Login using credentials preset in the database
+3. Add your social links
 
-<img src="https://i.ibb.co/L5GQ6GX/empty.png" alt="empty" border="0" />
-
-3. Add a new url to shorten
-- **IMPORTANT** make sure there is "http://" or "https://" in the long URL or it wont work.
-
-<img src="https://i.ibb.co/xgwVbvt/shorten.png" alt="shorten" border="0" width="500" height="500" />
-
-4. Done! You can now visit the new short URL which will forward to the set long URL
+4. Done! You can now visit the new short URL which will have a custom page with your profile image, name and social links.
 ****
 ## Configuration
 
