@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site":"shorturls-1a0e2",
+    "site":"linktree-95320",
     "public": "build",
     "ignore": [
       "firebase.json",

@@ -1,22 +1,12 @@
 {
-  "short_name": "Ketyl",
-  "name": "Ketyl | URL Shortener",
+  "short_name": "Zemo",
+  "name": "Zemo | Link Tree",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "logo.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "./icons/favicon-192x192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "./icons/favicon-512x512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }	    
+      "type": "image/jpg"
+    }    
   ],
   "start_url": "./admin",
   "display": "standalone",

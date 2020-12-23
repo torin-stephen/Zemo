@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { loginUser } from "../actions";
+import { googleLoginUser } from "../actions";
 import { withStyles } from "@material-ui/styles";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 
+
 const styles = () => ({
-  "@global": {
+  main : {
     body: {
-      backgroundColor: "#fff"
+      background: "none",
     }
   },
   paper: {
@@ -52,49 +52,24 @@ class Login extends Component {
 
   handleSubmit = () => {
     const { dispatch } = this.props;
-    const { email, password } = this.state;
 
-    dispatch(loginUser(email, password));
+    dispatch(googleLoginUser());
   };
 
+
   render() {
-    const { classes, loginError, isAuthenticated } = this.props;
+    const { classes, isAuthenticated } = this.props;
     if (isAuthenticated) {
       return <Redirect to="/admin" />;
     } else {
       return (
         <Container component="main" maxWidth="xs">
           <Paper className={classes.paper}>
-            <Avatar className={classes.avatar} src="/favicon.ico">
+            <Avatar className={classes.avatar} src="/logo.jpg">
             </Avatar>
             <Typography component="h1" variant="h5">
-              Ketyl
+              Links
             </Typography>
-            <br></br>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              onChange={this.handleEmailChange}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              onChange={this.handlePasswordChange}
-            />
-            {loginError && (
-              <Typography component="p" className={classes.errorText}>
-                Incorrect email or password.
-              </Typography>
-            )}
             <br></br>
             <Button
               type="button"
@@ -105,8 +80,9 @@ class Login extends Component {
               className={classes.submit}
               onClick={this.handleSubmit}
             >
-              Sign In
+              Sign In With Google
             </Button>
+            <br></br>
           </Paper>
         </Container>
       );

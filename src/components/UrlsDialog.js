@@ -5,54 +5,42 @@ export default function UrlsDialog(props) {
 
     return (
         <Dialog open={props.state.formopen} onClose={props.handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Shorten URL</DialogTitle>
+            <DialogTitle id="form-dialog-title">Create Zemo</DialogTitle>
             <DialogContent>
-                {props.state.lurl.length === 0 && props.state.curl.length === 0 &&
+                {props.state.ytlink.length === 0 && props.state.iglink.length === 0 && props.state.twlink.length === 0 && 
                     (
                         <DialogContentText>
-                            Enter Long and Short URLs.
-                        </DialogContentText>
-                    )
-                }
-                {props.state.lurl.length === 0 && props.state.curl.length > 0 &&
-                    (
-                        <DialogContentText>
-                            Enter Long URL.
-                        </DialogContentText>
-                    )
-                }
-                {props.state.lurl.length > 0 && props.state.curl.length === 0 &&
-                    (
-                        <DialogContentText>
-                            Enter Short URL.
-                        </DialogContentText>
-                    )
-                }
-                {props.state.lurl.length > 0 && props.state.curl.length > 0 &&
-                    (
-                        <DialogContentText>
-                            Looks good to go!
+                            Enter URLs.
                         </DialogContentText>
                     )
                 }
                 <TextField
                     autoFocus
                     margin="dense"
-                    id="longurl"
-                    label="Long URL"
+                    id="youtubelink"
+                    label="Youtube Link"
                     type="url"
                     fullWidth
-                    value={props.state.lurl}
-                    onChange={props.handleLurlChange}
+                    value={props.state.ytlink}
+                    onChange={props.handleYtLinkChange}
                 />
                 <TextField
                     margin="dense"
-                    id="customurl"
-                    label="Custom URL"
-                    type="text"
+                    id="instagramlink"
+                    label="Instagram Link"
+                    type="url"
                     fullWidth
-                    value={props.state.curl}
-                    onChange={props.handleCurlChange}
+                    value={props.state.iglink}
+                    onChange={props.handleIgLinkChange}
+                />
+                <TextField
+                    margin="dense"
+                    id="twitterlink"
+                    label="Twitter Link"
+                    type="url"
+                    fullWidth
+                    value={props.state.twlink}
+                    onChange={props.handleTwLinkChange}
                 />
             </DialogContent>
             <DialogActions>
@@ -60,7 +48,7 @@ export default function UrlsDialog(props) {
                     Cancel
               </Button>
                 <Button onClick={props.handleSubmit} color="primary">
-                    Shorten
+                    Create
               </Button>
             </DialogActions>
         </Dialog>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import MainToolBar from "./MainToolBar.js";
 import CardUrls from "./CardUrls.js";
-import ListUrls from "./ListUrls.js";
 import UrlsDialog from "./UrlsDialog.js";
 import Footer from "./Footer.js";
 
+
+
 import { connect } from "react-redux";
-import { logoutUser } from "../actions";
+import { googleLogoutUser } from "../actions";
 import { myFirebase, db } from '../firebase/firebase';
 
 import {  AppBar, Button, Container, CssBaseline,
@@ -44,37 +44,56 @@ class Admin extends Component {
 		this.state = {
 			user: null,
       loading: true,
-      shortUrls: [],
+      links: [],
       formopen: false,
-      lurl: "",
+      ytlink: "",
+      iglink: "",
+      twlink: "",
       curl: "",
       successToast: false,
       viewMode: "module",
     }
-    this.handleLurlChange = this.handleLurlChange.bind(this);
-    this.handleCurlChange = this.handleCurlChange.bind(this);
+    this.handleYtLinkChange = this.handleYtLinkChange.bind(this);
+    this.handleIgLinkChange = this.handleIgLinkChange.bind(this);
+    this.handleTwLinkChange = this.handleTwLinkChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   
-  handleLurlChange = (event) => {
-    this.setState({lurl: event.target.value});
+  
+  handleYtLinkChange = (event) => {
+    this.setState({ytlink: event.target.value});
   }
 
-  handleCurlChange = (event) => {
-    this.setState({curl: event.target.value});
+  handleIgLinkChange = (event) => {
+    this.setState({iglink: event.target.value});
+  }
+
+  handleTwLinkChange = (event) => {
+    this.setState({twlink: event.target.value});
+  }
+
+  handlePfpChange = (event) => {
+    this.setState({photoURL: event.target.value});
   }
 
   handleSubmit = async (event) => {
-    var lurl = this.state.lurl;
-    var curl = this.state.curl;
+    var ytlink = this.state.ytlink;
+    var iglink = this.state.iglink;
+    var twlink = this.state.twlink;
+    var curl = this.state.user.uid.substring(0, 5);
     const self = this;
 
     let data = {
-      lurl: lurl,
-      curl: curl,
+      ytlink: ytlink,
+      iglink: iglink,
+      twlink: twlink,
+      curl: this.state.user.uid.substring(0, 5),
+      photoURL: this.state.user.photoURL,
+      name: this.state.user.displayName,
     };
     
-    db.collection('shorturls').doc(curl).set(data).then(function(){
+    db.collection('links').doc(curl).set(data).then(function(){
       self.setState({ successToast: true});
     });
 
@@ -84,23 +103,18 @@ class Admin extends Component {
     event.preventDefault();
   }
 
-  handleDeleteShortUrl = (curl) => {
+  handleEditLinks = (curl) => {
     const self = this;
-    db.collection('shorturls').doc(curl).delete().then(function(){
-      self.updateUrls();
-    });
-  }
-
-  handleEditShortUrl = (curl) => {
-    const self = this;
-    var docref = db.collection('shorturls').doc(curl);
+    var docref = db.collection('links').doc(this.state.user.uid.substring(0, 5));
     docref.get().then(doc => {
       if (!doc.exists) {
         console.log('No such document!');
       } else {
         var data = doc.data();
 
-        self.setState({lurl: data.lurl});
+        self.setState({ytlink: data.ytlink});
+        self.setState({iglink: data.iglink});
+        self.setState({twlink: data.twlink});
         self.setState({curl: data.curl});
         self.setState({formopen: true});
       }
@@ -112,8 +126,11 @@ class Admin extends Component {
 
   handleClickOpen = () => {
     this.setState({ formopen: true});
-    this.setState({lurl: ""});
+    this.setState({ytlink: ""});
+    this.setState({iglink: ""});
+    this.setState({twlink: ""});
     this.setState({curl: ""});
+    this.setState({photoURL: ""});
   };
 
   handleClose = () => {
@@ -131,12 +148,15 @@ class Admin extends Component {
   updateUrls = () => {
     const self = this;
     self.setState({ loading: true });
-    self.setState({ shortUrls: []});
+    self.setState({ links: []});
 
-    db.collection('shorturls').get()
+    db.collection('links').get()
     .then((snapshot) => {
       snapshot.forEach((doc) => {
-        self.setState({shortUrls: [...self.state.shortUrls, {"id": doc.id, "data": doc.data()}]});
+        var data = doc.data();
+        if (data.curl === this.state.user.uid.substring(0, 5)) {
+          self.setState({links: [...self.state.links, {"id": doc.id, "data": doc.data()}]});
+        }
       });
       self.setState({ loading: false });
     })
@@ -178,7 +198,7 @@ class Admin extends Component {
   
   handleLogout = () => {
     const { dispatch } = this.props;
-    dispatch(logoutUser());
+    dispatch(googleLogoutUser());
   };
 
   render() {
@@ -191,7 +211,7 @@ class Admin extends Component {
           <AppBar position="fixed">
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
-                Ketyl
+                Zemo
               </Typography>
               <Button color="inherit" onClick={this.handleLogout} >Logout</Button>
             </Toolbar>
@@ -203,22 +223,18 @@ class Admin extends Component {
           )
         }
         <main>
-          <MainToolBar state={this.state} updateViewMode={this.updateViewMode} />
-          {this.state.shortUrls.length > 0 ?
+          {this.state.links.length > 0 ?
             (
               <>
                 { this.state.viewMode === "module" ? (
                   <CardUrls 
-                    shortUrls = {this.state.shortUrls}
-                    handleEditShortUrl = {this.handleEditShortUrl}
-                    handleDeleteShortUrl = {this.handleDeleteShortUrl}
+                    links = {this.state.links}
+                    handleEditLinks = {this.handleEditLinks}
+                    handleDeletelinks = {this.handleDeletelinks}
                   />
                 ): (
-                  <ListUrls 
-                    shortUrls = {this.state.shortUrls}
-                    handleEditShortUrl = {this.handleEditShortUrl}
-                    handleDeleteShortUrl = {this.handleDeleteShortUrl}
-                  />
+                  <>
+                  </>
                 )}
               </>
             )
@@ -227,6 +243,8 @@ class Admin extends Component {
               <div className={classes.heroContent}>
                 <Container maxWidth="sm">
                   <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                    <br></br>
+                    <br></br>
                     Oops! Nothing here.
                   </Typography>
                 </Container>
@@ -241,8 +259,11 @@ class Admin extends Component {
           <UrlsDialog 
             state={this.state} 
             handleClose = {this.handleClose}
-            handleLurlChange = {this.handleLurlChange}
+            handleYtLinkChange = {this.handleYtLinkChange}
+            handleIgLinkChange = {this.handleIgLinkChange}
+            handleTwLinkChange = {this.handleTwLinkChange}
             handleCurlChange = {this.handleCurlChange}
+            handlePfpChange = {this.handlePfpChange}
             handleSubmit = {this.handleSubmit}
           />
           

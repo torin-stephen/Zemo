@@ -30,7 +30,7 @@ export default function CardUrls(props) {
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
-                {props.shortUrls.map((card) => (
+                {props.links.map((card) => (
                     <Grid item key={card.id} xs={12} sm={6} md={4}>
                         <Card className={classes.card}>
                             <CardHeader 
@@ -46,18 +46,21 @@ export default function CardUrls(props) {
                             />
                             <CardContent className={classes.cardContent}>
                                 <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
-                                    {card.data.lurl}
+                                    {card.data.ytlink}
+                                </Box>
+                                <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
+                                    {card.data.iglink}
+                                </Box>
+                                <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
+                                    {card.data.twlink}
                                 </Box>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary" href={card.data.lurl} target="_blank">
+                                <Button size="small" color="primary" href={card.data.curl} target="_blank">
                                     Open
                                 </Button>
-                                <Button size="small" onClick={() => props.handleEditShortUrl(card.data.curl)}>
+                                <Button size="small" onClick={() => props.handleEditLinks(card.data.curl)}>
                                     Edit
-                                </Button>
-                                <Button size="small" color="secondary" onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
-                                    Delete
                                 </Button>
                             </CardActions>
                         </Card>

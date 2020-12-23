@@ -53,7 +53,7 @@ export default function ListUrls(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {props.shortUrls.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((card) => {
+                            {props.links.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((card) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={card.id}>
                                         <TableCell key="curl" align="left" style={{ minWidth: "100px" }}>
@@ -77,10 +77,10 @@ export default function ListUrls(props) {
                                                 <Button size="small" color="primary" href={card.data.lurl} target="_blank">
                                                     <VisibilityIcon />
                                                 </Button>
-                                                <Button size="small" onClick={() => props.handleEditShortUrl(card.data.curl)}>
+                                                <Button size="small" onClick={() => props.handleEditLinks(card.data.curl)}>
                                                     <EditIcon />
                                                 </Button>
-                                                <Button size="small" color="secondary" onClick={() => props.handleDeleteShortUrl(card.data.curl)}>
+                                                <Button size="small" color="secondary" onClick={() => props.handleDeleteLinks(card.data.curl)}>
                                                     <DeleteForeverIcon />
                                                 </Button>
                                             </ButtonGroup>
@@ -94,7 +94,7 @@ export default function ListUrls(props) {
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={props.shortUrls.length}
+                    count={props.links.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}

@@ -3,12 +3,12 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBFN0DZl_EH8YxBkvOajJOKC83a7lSQIek",
-  authDomain: "shorturls-1a0e2.firebaseapp.com",
-  projectId: "shorturls-1a0e2",
-  storageBucket: "shorturls-1a0e2.appspot.com",
-  messagingSenderId: "736151779301",
-  appId: "1:736151779301:web:f60f5277a5c2f317a9210c"
+  apiKey: "AIzaSyCHWpaWE8HeswqQyR8zChomNFkVfYnuyo4",
+  authDomain: "linktree-95320.firebaseapp.com",
+  projectId: "linktree-95320",
+  storageBucket: "linktree-95320.appspot.com",
+  messagingSenderId: "51479558172",
+  appId: "1:51479558172:web:296d2e356d1b93a62a07d9"
 };
 
 export const myFirebase = firebase.initializeApp(firebaseConfig);
