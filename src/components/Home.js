@@ -30,6 +30,7 @@ class Home extends Component {
           self.setState({yt: data.ytlink});
           self.setState({ig: data.iglink});
           self.setState({tw: data.twlink});
+          self.setState({bio: data.bio});
           self.setState({pfp: data.photoURL});
           self.setState({name: data.name})
         }
@@ -57,6 +58,7 @@ class Home extends Component {
             <div className="profile-sub-head">
             </div>
             <div className="profile-hire-block">
+            { this.state.bio }
             </div>
           </div>
           <div className="profile-social-wrap">

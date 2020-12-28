@@ -48,11 +48,17 @@ export default function CardUrls(props) {
                                 <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
                                     {card.data.ytlink}
                                 </Box>
+                                <br></br>
                                 <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
                                     {card.data.iglink}
                                 </Box>
+                                <br></br>
                                 <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
                                     {card.data.twlink}
+                                </Box>
+                                <br></br>
+                                <Box bgcolor="text.primary" color="background.paper" p={2} style={{ overflowX: 'auto', overflowY: 'hidden', whiteSpace: "nowrap" }}>
+                                    {card.data.bio}
                                 </Box>
                             </CardContent>
                             <CardActions>

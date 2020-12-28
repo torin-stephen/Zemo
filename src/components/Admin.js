@@ -49,6 +49,7 @@ class Admin extends Component {
       ytlink: "",
       iglink: "",
       twlink: "",
+      bio: "",
       curl: "",
       successToast: false,
       viewMode: "module",
@@ -56,6 +57,7 @@ class Admin extends Component {
     this.handleYtLinkChange = this.handleYtLinkChange.bind(this);
     this.handleIgLinkChange = this.handleIgLinkChange.bind(this);
     this.handleTwLinkChange = this.handleTwLinkChange.bind(this);
+    this.handleBioChange = this.handleBioChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -73,6 +75,10 @@ class Admin extends Component {
     this.setState({twlink: event.target.value});
   }
 
+  handleBioChange = (event) => {
+    this.setState({bio: event.target.value});
+  }
+
   handlePfpChange = (event) => {
     this.setState({photoURL: event.target.value});
   }
@@ -81,6 +87,7 @@ class Admin extends Component {
     var ytlink = this.state.ytlink;
     var iglink = this.state.iglink;
     var twlink = this.state.twlink;
+    var bio = this.state.bio;
     var curl = this.state.user.uid.substring(0, 5);
     const self = this;
 
@@ -88,6 +95,7 @@ class Admin extends Component {
       ytlink: ytlink,
       iglink: iglink,
       twlink: twlink,
+      bio: bio.substring(0, 150),
       curl: this.state.user.uid.substring(0, 5),
       photoURL: this.state.user.photoURL,
       name: this.state.user.displayName,
@@ -115,6 +123,7 @@ class Admin extends Component {
         self.setState({ytlink: data.ytlink});
         self.setState({iglink: data.iglink});
         self.setState({twlink: data.twlink});
+        self.setState({bio: data.bio})
         self.setState({curl: data.curl});
         self.setState({formopen: true});
       }
@@ -129,6 +138,7 @@ class Admin extends Component {
     this.setState({ytlink: ""});
     this.setState({iglink: ""});
     this.setState({twlink: ""});
+    this.setState({bio: ""});
     this.setState({curl: ""});
     this.setState({photoURL: ""});
   };
@@ -201,6 +211,10 @@ class Admin extends Component {
     dispatch(googleLogoutUser());
   };
 
+  handleKetylLink = () => {
+    window.location.href='https://ketyl.tk/admin';
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -214,6 +228,7 @@ class Admin extends Component {
                 Zemo
               </Typography>
               <Button color="inherit" onClick={this.handleLogout} >Logout</Button>
+              <Button color="inherit" onClick={this.handleZemoLink}>Ketyl</Button>
             </Toolbar>
           </AppBar>
         </div>
@@ -262,7 +277,7 @@ class Admin extends Component {
             handleYtLinkChange = {this.handleYtLinkChange}
             handleIgLinkChange = {this.handleIgLinkChange}
             handleTwLinkChange = {this.handleTwLinkChange}
-            handleCurlChange = {this.handleCurlChange}
+            handleBioChange = {this.handleBioChange}
             handlePfpChange = {this.handlePfpChange}
             handleSubmit = {this.handleSubmit}
           />

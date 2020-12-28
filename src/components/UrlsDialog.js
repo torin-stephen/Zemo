@@ -42,6 +42,15 @@ export default function UrlsDialog(props) {
                     value={props.state.twlink}
                     onChange={props.handleTwLinkChange}
                 />
+                <TextField
+                    margin="dense"
+                    id="biotext"
+                    label="Bio Text"
+                    type="text"
+                    fullWidth
+                    value={props.state.bio}
+                    onChange={props.handleBioChange}
+                />
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">
